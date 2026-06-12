@@ -1,11 +1,13 @@
 package com.jeananani.immosmart.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,7 +32,6 @@ public class User {
     @Column(name = "username", nullable = false, length = 100)
     private String username;
 
-    @Column(nullable = false)
     private LocalDate birthDate;
 
     @Column(unique = true, nullable = false, length = 150)
@@ -43,9 +44,24 @@ public class User {
     @ToString.Exclude
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
+
     @Builder.Default
-    private Boolean active = true;
+    @Column(nullable = false)
+    private Boolean enabled = true;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean accountNonExpired = true;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean accountNonLocked = true;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean credentialsNonExpired = true;
 
     @Enumerated(EnumType.STRING)
     @ManyToMany(fetch = FetchType.LAZY)
@@ -53,6 +69,10 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Property> properties;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
