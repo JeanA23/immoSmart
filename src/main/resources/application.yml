@@ -1,0 +1,48 @@
+# App Config
+
+spring:
+
+  application:
+    name: immoSmart
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/immo_smart_db_test?createDatabaseIfNotExist=true
+    username: root
+    password:
+
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
+
+  # DevTools
+  devtools:
+    restart:
+      enabled: true
+
+# Logs
+logging:
+  level:
+    root: INFO
+    com.cheridanh.infradev: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.springframework.security: DEBUG
+  file:
+    name: logs/immo_smart_dev.log
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
+jwt:
+  secret: sK3t4fN1V6y2aQ0QvE8J2k3mP6x9ZLhR8w4nXJYc9dE=,
+  access-token-expiration: 86400000
+  refresh-token-expiration: 86400000
