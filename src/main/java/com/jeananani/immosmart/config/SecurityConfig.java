@@ -64,7 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
 
                         // Endpoints Seller et Admin
-                        .requestMatchers("/api/v1/staff/**").hasAnyRole("SELLER", "ADMIN")
+                        .requestMatchers("/api/v1/seller/**").hasAnyRole("SELLER", "ADMIN")
 
                         // Tous les autres endpoints nécessitent une authentification
                         .anyRequest().authenticated()

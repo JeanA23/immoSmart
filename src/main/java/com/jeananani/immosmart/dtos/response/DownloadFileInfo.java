@@ -9,5 +9,5 @@ import org.springframework.core.io.Resource;
 public class DownloadFileInfo {
 
     private Resource resource;
-    private Picture picture;
+    //private Picture picture;
 }
