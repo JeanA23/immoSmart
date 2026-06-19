@@ -34,7 +34,7 @@ public class PropertyResponse {
     private double longitude;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-   // private boolean isFavorite;
+    private boolean isFavorite;
 
     public static PropertyResponse fromEntity(Property property) {
 
@@ -54,6 +54,7 @@ public class PropertyResponse {
                 .longitude(property.getLongitude())
                 .createdAt(property.getCreatedAt())
                 .updatedAt(property.getUpdatedAt())
+                .isFavorite(property.isFavorite())
                 .build();
     }
 }

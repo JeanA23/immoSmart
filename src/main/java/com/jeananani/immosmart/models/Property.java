@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -65,5 +66,10 @@ public class Property {
     @JsonManagedReference
     private User user;
 
+    @OneToMany(mappedBy = "property")
+    List<Favorite> favorites;
+
+    @Transient
+    private boolean isFavorite;
 
 }
