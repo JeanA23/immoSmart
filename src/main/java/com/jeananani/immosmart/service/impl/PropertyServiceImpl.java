@@ -138,14 +138,14 @@ public class PropertyServiceImpl implements PropertyService {
 
         var props = propertyRepository.findAll(spec, pageable);
 
-        /*if (Objects.nonNull(principal)) {
+        if (Objects.nonNull(principal)) {
             props = props.map(p -> {
                 p.setFavorite(p.getFavorites().stream().anyMatch(
-                        f -> f.getMember().getEmail().equals(principal.getName())
+                        f -> f.getUser().getEmail().equals(principal.getName())
                 ));
                 return p;
             });
-        }*/
+        }
 
         return props.map(PropertyResponse::fromEntity);
     }
